@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -o nounset
+set -o pipefail
+set -o posix
+
+# Don't push images if branch is not master
+echo "Current Branch: $SOURCE_BRANCH"
+if [ "${SOURCE_BRANCH}" != "master" ]; then
+  exit 0
+fi
+
+for tag in $(sudo docker images fauust/docker-systemd --format "{{.Tag}}"); do
+  docker push "fauust/docker-systemd:${tag}"
+done
