@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -o nounset
+set -o pipefail
+set -o posix
+
+# get tags to build from .travis.yml file
+grep -- "- BASE_IMAGE" <.travis.yml | while IFS= read -r BASE_IMAGE; do
+  TAG="fauust/docker-systemd:${BASE_IMAGE/:/-}"
+  docker build . --no-cache -t "$TAG" --build-arg base_image="$BASE_IMAGE"
+done
