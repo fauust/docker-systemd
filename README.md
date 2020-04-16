@@ -1,6 +1,7 @@
 # docker-systemd
 
 [![travis build status](https://img.shields.io/travis/fauust/docker-systemd?logo=travis)](https://travis-ci.org/fauust/docker-systemd)
+[![docker build status](https://img.shields.io/docker/cloud/build/fauust/docker-systemd?logo=docker&label=build)](https://hub.docker.com/r/fauust/docker-systemd)
 
 Docker container for systemd tests on Debian based OS.
 
@@ -17,11 +18,7 @@ Example `base_system` arguments :
 - `ubuntu:18.04`
 - `ubuntu:20.04`
 
-Containers are build on TravisCI (<https://travis-ci.org/fauust/docker-systemd>)
-and automatically pushed to Docker registry
-(<https://hub.docker.com/r/fauust/docker-systemd>).
-
-The following containers are available :
+The following containers are available from [Docker Hub](https://hub.docker.com/r/fauust/docker-systemd).
 
 ```bash
 docker pull fauust/docker-systemd:debian-10
