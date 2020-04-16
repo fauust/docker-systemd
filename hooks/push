@@ -10,6 +10,6 @@ if [ "${SOURCE_BRANCH}" != "master" ]; then
   exit 0
 fi
 
-for tag in $(sudo docker images fauust/docker-systemd --format "{{.Tag}}"); do
+for tag in $(docker images fauust/docker-systemd --format "{{.Tag}}"); do
   docker push "fauust/docker-systemd:${tag}"
 done
