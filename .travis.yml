@@ -1,0 +1,40 @@
+---
+language: minimal
+services: docker
+
+env:
+  global:
+    - DOCKER_USERNAME: fauust
+    - secure: "GjqXZ5uWU27MU8UFRA8t3kidB3EDdeuefaBHHmOqK3K78g8HIllFcC23HSYpiFiVCMoe5cojyGd/NfgnLKK71fHuEpev+Qo7+sEDbDCNhyDhHJQv8wpsYGKepMDiQ7vrX79U2kj4ETCuBjA/wFJCmjpENZ61pUKz0wniKX2xxpJsMkaHlwp/k6hIve77UhRWQ0DOazgoZbJGdRfOoBVhg6hf34IjFY4pDxuZNEapT8FnJmoNfuSEdoa40vI75UbNuADB88G2+Vjr0JTDXFOAEwwOuNJemhO41QOMwGz3IqTaGWEbmGgmWZYOvsiCZM2i8ZmW8Zr2xZdlWbmOLMYS47n58czEfbP3Ggmu+l1/wIxGqqPH0DUS6Xbc3qJMJGe/cGpfhVP1njaJyK9ZqFHLCBIUNxMrKOxj+ekURq+Q3W4AATE+mnEOD1mzfYqRZnotv1TyGH71dTkx2n7tkvryXKKKMtKhpLrUFIznyJht9pvFV6W2TIVXK4SvNnk1FTIaI0nt6N7iRMXFD5FcMKvODbvavcyyhxOgTKSyCGZ5mpdftA4aoLwsXZ6PF24O4ULlEaH547oacbyUMXVJZzT/mUwxu4oSrb8kLp9JTlY4YH2QxSVt3rtNfySW/7RKwJbyEzLgq7VnNtQfpIMUKuYekzGtkFRytAHDaJXHlRnrxRc="
+  matrix:
+    - BASE_IMAGE: debian:10
+    - BASE_IMAGE: debian:sid
+    - BASE_IMAGE: ubuntu:18.04
+    - BASE_IMAGE: ubuntu:20.04
+
+before_install:
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  - wget https://github.com/wagoodman/dive/releases/download/v0.9.2/dive_0.9.2_linux_amd64.deb
+  - sudo apt-get install ./dive_0.9.2_linux_amd64.deb
+addons:
+  apt:
+    update: true
+
+script:
+  - docker build . -t fauust/docker-systemd:${BASE_IMAGE/:/-} --build-arg base_image=$BASE_IMAGE
+  - docker run --rm -v $(pwd):/src -w /src hadolint/hadolint:v1.7.0 hadolint Dockerfile
+  - dive --ci fauust/docker-systemd:${BASE_IMAGE/:/-}
+  - docker run --name test-${BASE_IMAGE/:/-} -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:${BASE_IMAGE/:/-}
+  - sleep 2
+  - docker exec -t test-${BASE_IMAGE/:/-} systemd-analyze
+
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+deploy:
+  provider: script
+  script:
+    - docker push fauust/docker-systemd:${BASE_IMAGE/:/-}
+  branches:
+    only:
+      - master
