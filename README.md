@@ -3,7 +3,7 @@
 [![travis build status](https://img.shields.io/travis/fauust/docker-systemd?logo=travis)](https://travis-ci.org/fauust/docker-systemd)
 [![docker build status](https://img.shields.io/docker/cloud/build/fauust/docker-systemd?logo=docker&label=build)](https://hub.docker.com/r/fauust/docker-systemd)
 
-Docker container for systemd tests on Debian based OS.
+Docker container for systemd testing on Debian based OS.
 
 ## Build
 
