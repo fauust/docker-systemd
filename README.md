@@ -34,7 +34,7 @@ For systemd to start, it is necessary to:
 - share the volume `/sys/fs/cgroup` with container (use **read-only** mode);
 - run the container in `privileged` mode.
 
-```txt
+```console
 ❯ docker run --name sys-test --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:debian-10
 ❯ docker exec -it sys-test bash
 root@59c9e3e924e7:/# apt update && apt install procps
