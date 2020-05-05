@@ -8,7 +8,7 @@ Docker containers for systemd testing on Debian based OS.
 ## Build
 
 ```console
-❯ docker build . -t systemd-debian-sid  --build-args base_system=debian:sid
+❯ docker build . -t systemd-debian-sid  --build-arg base_system=debian:sid
 ```
 
 Example `base_system` arguments :
