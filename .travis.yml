@@ -2,6 +2,13 @@
 language: minimal
 services: docker
 
+env:
+  matrix:
+    - BASE_IMAGE: debian:10
+    - BASE_IMAGE: debian:sid
+    - BASE_IMAGE: ubuntu:18.04
+    - BASE_IMAGE: ubuntu:20.04
+
 before_install:
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
@@ -12,13 +19,6 @@ addons:
 cache:
   directories:
     - $HOME/.cache/pre-commit
-
-env:
-  matrix:
-    - BASE_IMAGE: debian:10
-    - BASE_IMAGE: debian:sid
-    - BASE_IMAGE: ubuntu:18.04
-    - BASE_IMAGE: ubuntu:20.04
 
 jobs:
   include:
