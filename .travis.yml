@@ -30,9 +30,10 @@ jobs:
   include:
     - name: lint with pre-commit
       language: python
+      install: skip
       before_install: skip
       script:
-        - pip3 install pre-commit
+        - pip install pre-commit
         - pre-commit run -c .travis-pre-commit-config.yaml -a
 
 script:
