@@ -32,6 +32,11 @@ repos:
         language: docker_image
         entry: koalaman/shellcheck:stable
         types: [shell]
+      - id: docker-hadolint
+        name: Run hadolint with docker
+        language: docker_image
+        entry: hadolint/hadolint:latest hadolint
+        files: Dockerfile
       - id: docker-prettier
         name: Run prettier with docker
         entry: tmknom/prettier:latest -l
