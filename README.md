@@ -13,6 +13,7 @@ Docker containers for systemd testing on Debian based OS.
 
 Example `base_system` arguments :
 
+- `debian:9`
 - `debian:10`
 - `debian:sid`
 - `ubuntu:18.04`
@@ -21,6 +22,7 @@ Example `base_system` arguments :
 The following containers are available from [Docker Hub](https://hub.docker.com/r/fauust/docker-systemd).
 
 ```console
+❯ docker pull fauust/docker-systemd:debian-9
 ❯ docker pull fauust/docker-systemd:debian-10
 ❯ docker pull fauust/docker-systemd:debian-sid
 ❯ docker pull fauust/docker-systemd:ubuntu-18.04
