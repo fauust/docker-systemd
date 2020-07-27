@@ -4,6 +4,7 @@ services: docker
 
 env:
   matrix:
+    - BASE_IMAGE: debian:9
     - BASE_IMAGE: debian:10
     - BASE_IMAGE: debian:sid
     - BASE_IMAGE: ubuntu:18.04
@@ -11,8 +12,7 @@ env:
 
 before_install:
   - |
-    if ! git diff --name-only HEAD^ | grep -qvE '(.md)|(.pdf)'
-    then
+    if ! git diff --name-only HEAD^ | grep -qvE '(.md)|(.pdf)'; then
       echo "Only doc files were updated, not running the CI."
       exit
     fi
@@ -40,5 +40,11 @@ script:
   - docker build . -t fauust/docker-systemd:${BASE_IMAGE/:/-} --build-arg base_image=$BASE_IMAGE
   - docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/mnt -w /mnt wagoodman/dive:latest --ci fauust/docker-systemd:${BASE_IMAGE/:/-}
   - docker run --name test-${BASE_IMAGE/:/-} -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:${BASE_IMAGE/:/-}
-  - sleep 2
+  - |
+    # debian 9 takes time to boot
+    if [[ "$BASE_IMAGE" == "debian:9" ]]; then
+      sleep 100
+    else
+      sleep 2
+    fi
   - docker exec -t test-${BASE_IMAGE/:/-} systemd-analyze
