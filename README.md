@@ -29,12 +29,15 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull fauust/docker-systemd:ubuntu-20.04
 ```
 
-## Usage
+## Usage (docker)
 
 For systemd to start, it is necessary to:
 
 - share the volume `/sys/fs/cgroup` with container (use **read-only** mode);
 - run the container in `privileged` mode.
+
+You can also use [podman](https://podman.io/) that does not require it, see
+bellow.
 
 ```console
 ❯ docker run --name sys-test --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:debian-10
@@ -47,6 +50,26 @@ root@59c9e3e924e7:/# ps fax
     420 pts/0    R+     0:00  \_ ps fax
       1 ?        Ss     0:00 /lib/systemd/systemd
      24 ?        Ss     0:00 /lib/systemd/systemd-journald
+```
+
+## Usage (podman)
+
+Podman is much more "systemd friendly", see
+<https://developers.redhat.com/blog/2019/04/24/how-to-run-systemd-in-a-container/>.
+
+Here is how to use those containers with podman:
+
+```console
+❯ podman run --name sys-test -d fauust/docker-systemd:debian-10
+❯ podman exec -it sys-test bash
+root@181cc7d48a8a:/# apt update && apt install procps
+...
+root@181cc7d48a8a:/# ps fax
+    PID TTY      STAT   TIME COMMAND
+     24 pts/0    Ss     0:00 bash
+    859 pts/0    R+     0:00  \_ ps fax
+      1 ?        Ss     0:00 /lib/systemd/systemd
+     20 ?        Ss     0:00 /lib/systemd/systemd-journald
 ```
 
 ## Notes
