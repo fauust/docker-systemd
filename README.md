@@ -40,7 +40,7 @@ You can also use [podman](https://podman.io/) that does not require it, see
 bellow.
 
 ```console
-❯ docker run --name sys-test --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:debian-10
+❯ docker run --name sys-test --rm --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:debian-10
 ❯ docker exec -it sys-test bash
 root@59c9e3e924e7:/# apt update && apt install procps
 ...
@@ -60,7 +60,7 @@ Podman is much more "systemd friendly", see
 Here is how to use those containers with podman:
 
 ```console
-❯ podman run --name sys-test -d fauust/docker-systemd:debian-10
+❯ podman run --name sys-test --rm -d fauust/docker-systemd:debian-10
 ❯ podman exec -it sys-test bash
 root@181cc7d48a8a:/# apt update && apt install procps
 ...
