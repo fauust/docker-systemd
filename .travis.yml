@@ -4,11 +4,12 @@ services: docker
 
 env:
   matrix:
-    - BASE_IMAGE: debian:9
-    - BASE_IMAGE: debian:10
-    - BASE_IMAGE: debian:sid
+    - BASE_IMAGE: debian:9-slim
+    - BASE_IMAGE: debian:10-slim
+    - BASE_IMAGE: debian:sid-slim
     - BASE_IMAGE: ubuntu:18.04
     - BASE_IMAGE: ubuntu:20.04
+    - BASE_IMAGE: ubuntu:20.10
 
 before_install:
   - |
@@ -42,7 +43,7 @@ script:
   - docker run --name test-${BASE_IMAGE/:/-} -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:${BASE_IMAGE/:/-}
   - |
     # debian 9 takes time to boot
-    if [[ "$BASE_IMAGE" == "debian:9" ]]; then
+    if [[ "$BASE_IMAGE" == "debian:9-slim" ]]; then
       sleep 100
     else
       sleep 2

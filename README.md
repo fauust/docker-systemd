@@ -27,6 +27,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull fauust/docker-systemd:debian-sid
 ❯ docker pull fauust/docker-systemd:ubuntu-18.04
 ❯ docker pull fauust/docker-systemd:ubuntu-20.04
+❯ docker pull fauust/docker-systemd:ubuntu-20.10
 ```
 
 ## Usage (docker)
