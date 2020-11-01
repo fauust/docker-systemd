@@ -8,16 +8,20 @@ Docker containers for systemd testing on Debian based OS.
 ## Build
 
 ```console
-❯ docker build . -t systemd-debian-sid  --build-arg base_system=debian:sid
+❯ docker build . -t systemd-debian-sid  --build-arg base_system=debian:sid-slim
 ```
 
 Example `base_system` arguments :
 
-- `debian:9`
-- `debian:10`
-- `debian:sid`
+- `debian:9-slim`
+- `debian:10-slim`
+- `debian:sid-slim`
 - `ubuntu:18.04`
 - `ubuntu:20.04`
+- `ubuntu:20.10`
+
+You can also use "non-slim" Debian images (`debian:10`) but we only build images
+based on `-slim` versions of Debian images.
 
 The following containers are available from [Docker Hub](https://hub.docker.com/r/fauust/docker-systemd).
 
