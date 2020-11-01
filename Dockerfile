@@ -1,4 +1,4 @@
-ARG base_image=debian:10
+ARG base_image=debian:10-slim
 FROM "$base_image"
 
 RUN set -eux \
@@ -11,6 +11,7 @@ RUN set -eux \
     && rm -rf /var/lib/apt/lists/* \
       /tmp/* \
       /var/tmp/* \
+      /var/cache/debconf/* \
     && rm -f /lib/systemd/system/multi-user.target.wants/* \
       /etc/systemd/system/*.wants/* \
       /lib/systemd/system/local-fs.target.wants/* \
