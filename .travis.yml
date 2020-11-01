@@ -38,9 +38,10 @@ jobs:
         - pre-commit run -c .travis-pre-commit-config.yaml -a
 
 script:
-  - docker build . -t fauust/docker-systemd:${BASE_IMAGE/:/-} --build-arg base_image=$BASE_IMAGE
-  - docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/mnt -w /mnt wagoodman/dive:latest --ci fauust/docker-systemd:${BASE_IMAGE/:/-}
-  - docker run --name test-${BASE_IMAGE/:/-} -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:${BASE_IMAGE/:/-}
+  - export img="${BASE_IMAGE/:/-}"
+  - docker build . -t fauust/docker-systemd:${img/-slim/} --build-arg base_image=$BASE_IMAGE
+  - docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/mnt -w /mnt wagoodman/dive:latest --ci fauust/docker-systemd:${img/-slim/}
+  - docker run --name test-${img/-slim/} -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:${img/-slim/}
   - |
     # debian 9 takes time to boot
     if [[ "$BASE_IMAGE" == "debian:9-slim" ]]; then
@@ -48,4 +49,4 @@ script:
     else
       sleep 2
     fi
-  - docker exec -t test-${BASE_IMAGE/:/-} systemd-analyze
+  - docker exec -t test-${img/-slim/} systemd-analyze
