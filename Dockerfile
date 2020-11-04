@@ -7,11 +7,11 @@ RUN set -eux \
       bash \
       systemd \
       systemd-sysv \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-      /tmp/* \
-      /var/tmp/* \
       /var/cache/debconf/* \
+      /usr/share/doc \
+      /usr/share/man \
+    && apt-get clean \
     && rm -f /lib/systemd/system/multi-user.target.wants/* \
       /etc/systemd/system/*.wants/* \
       /lib/systemd/system/local-fs.target.wants/* \
