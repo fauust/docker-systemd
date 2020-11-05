@@ -1,5 +1,5 @@
 ---
-image: alpine/edge
+image: debian/buster
 tasks:
   - say-hello: |
       echo hello
