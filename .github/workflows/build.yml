@@ -4,17 +4,19 @@ name: build
 on:
   push:
     paths:
-      - ".github/workflows/build.yml"
-      - "Dockerfile"
+      - .github/workflows/build.yml
+      - .dive-ci
+      - Dockerfile
   pull_request:
     paths:
-      - ".github/workflows/build.yml"
-      - "Dockerfile"
+      - .github/workflows/build.yml
+      - .dive-ci
+      - Dockerfile
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: OS ${{ matrix.base_img }}
+    name: ${{ matrix.base_img }}
     strategy:
       matrix:
         base_img:
@@ -32,11 +34,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Build ${{ matrix.base_img }} docker image
+      - name: Build ${{ matrix.base_img }}
         run: |
           export img="${BASE_IMAGE/:/-}"
           docker build . -t fauust/docker-systemd:${img/-slim/} --build-arg base_image=$BASE_IMAGE
+      - name: Dive check ${{ matrix.base_img }}
+        run: |
+          export img="${BASE_IMAGE/:/-}"
           docker run --rm -i -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/mnt -w /mnt wagoodman/dive:latest --ci fauust/docker-systemd:${img/-slim/}
+      - name: Systemd check ${{ matrix.base_img }}
+        run: |
+          export img="${BASE_IMAGE/:/-}"
           docker run --name test-${img/-slim/} -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:${img/-slim/}
           # debian 9 takes time to boot
           if [[ "$BASE_IMAGE" == "debian:9-slim" ]]; then
