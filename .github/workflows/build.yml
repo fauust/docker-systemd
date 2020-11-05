@@ -1,0 +1,33 @@
+name: Docker Image CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 0' # weekly
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: OS ${{ matrix.BASE_IMAGE }}
+    strategy: 
+      matrix:
+        BASE_IMAGE: [ debian:9-slim, debian:10-slim, debian:sid-slim, ubuntu:18.04, ubuntu:20.04, ubuntu:20.10 ]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build ${{ matrix.BASE_IMAGE }} Docker image
+      run: |
+        - export img="${BASE_IMAGE/:/-}"
+        - docker build . -t fauust/docker-systemd:${img/-slim/} --build-arg base_image=$BASE_IMAGE
+        - docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/mnt -w /mnt wagoodman/dive:latest --ci fauust/docker-systemd:${img/-slim/}
+        - docker run --name test-${img/-slim/} -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:${img/-slim/}
+        - |
+          # debian 9 takes time to boot
+          if [[ "$BASE_IMAGE" == "debian:9-slim" ]]; then
+            sleep 100
+          else
+            sleep 2
+          fi
+        - docker exec -t test-${img/-slim/} systemd-analyze
+        - docker build . --file Dockerfile --tag my-image-name:$(date +%s)
