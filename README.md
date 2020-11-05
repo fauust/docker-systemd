@@ -1,6 +1,7 @@
 # docker-systemd
 
-[![travis build status](https://img.shields.io/travis/fauust/docker-systemd?logo=travis)](https://travis-ci.com/fauust/docker-systemd)
+[![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/pre-commit/badge.svg?branch=master)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22pre-commit%22)
+[![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/build/badge.svg?branch=master)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22build%22)
 [![docker build status](https://img.shields.io/docker/cloud/build/fauust/docker-systemd?logo=docker&label=build)](https://hub.docker.com/r/fauust/docker-systemd)
 
 Docker containers for systemd testing on Debian based OS.
