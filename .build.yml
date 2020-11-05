@@ -1,6 +1,7 @@
 ---
-image: debian
-
+image: alpine/edge
 tasks:
   - say-hello: |
-      echo "salut!"
+      echo hello
+  - say-world: |
+      echo world
