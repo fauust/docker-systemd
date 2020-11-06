@@ -6,3 +6,6 @@ set -o posix
 
 typeset TAG="fauust/docker-systemd:${BASE_IMAGE/:/-}"
 podman build . --no-cache -t "${TAG/-slim/}" --build-arg base_image="$BASE_IMAGE"
+podman run --name "test-${TAG/-slim/}" -d "fauust/docker-systemd:${TAG/-slim/}"
+sleep 2
+podman exec "test-${TAG/-slim/}" systemd-analyze
