@@ -8,5 +8,5 @@ typeset TAG="fauust/docker-systemd:${BASE_IMAGE/:/-}"
 podman build . --no-cache -t "${TAG/-slim/}" --build-arg base_image="$BASE_IMAGE"
 podman run --rm --name "test-${BASE_IMAGE/:/-}" -d "${TAG/-slim/}"
 sleep 2
-podman exec "test-container" systemd-analyze
-podman stop --name "test-${BASE_IMAGE/:/-}"
+podman exec "test-${BASE_IMAGE/:/-}" systemd-analyze
+podman stop "test-${BASE_IMAGE/:/-}"
