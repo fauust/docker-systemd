@@ -4,13 +4,5 @@ set -o nounset
 set -o pipefail
 set -o posix
 
-typeset -r BASE_IMAGE="debian:10-slim \
-  debian:sid-slim \
-  ubuntu:18.04 \
-  ubuntu:20.04 \
-  ubuntu:20.10"
-
-for img in $BASE_IMAGE; do
-  typeset TAG="fauust/docker-systemd:${img/:/-}"
-  podman build . --no-cache -t "${TAG/-slim/}" --build-arg base_image="$img"
-done
+typeset TAG="fauust/docker-systemd:${BASE_IMAGE/:/-}"
+podman build . --no-cache -t "${TAG/-slim/}" --build-arg base_image="$BASE_IMAGE"
