@@ -38,7 +38,7 @@ repos:
         entry: hadolint/hadolint:latest hadolint
         files: Dockerfile
       - id: dockerfilelint
-        name: Run dockerfilelint with podman
+        name: Run dockerfilelint with docker
         language: docker_image
         entry: replicated/dockerfilelint:latest
         files: Dockerfile
