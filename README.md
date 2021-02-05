@@ -43,7 +43,7 @@ For systemd to start, it is necessary to:
 - run the container in `privileged` mode.
 
 You can also use [podman](https://podman.io/) that does not require it, see
-bellow.
+below.
 
 ```console
 ❯ docker run --name sys-test --rm --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:debian-10
