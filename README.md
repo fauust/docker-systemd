@@ -20,6 +20,7 @@ Example `base_system` arguments :
 - `ubuntu:18.04`
 - `ubuntu:20.04`
 - `ubuntu:20.10`
+- `ubuntu:21.04`
 
 You can also use "non-slim" Debian images (`debian:10`) but we only build images
 based on `-slim` versions of Debian images.
@@ -33,6 +34,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull fauust/docker-systemd:ubuntu-18.04
 ❯ docker pull fauust/docker-systemd:ubuntu-20.04
 ❯ docker pull fauust/docker-systemd:ubuntu-20.10
+❯ docker pull fauust/docker-systemd:ubuntu-21.04
 ```
 
 ## Usage (docker)
