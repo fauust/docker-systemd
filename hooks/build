@@ -7,7 +7,7 @@ set -o nounset
 set -o pipefail
 set -o posix
 
-# get tags to build from .travis.yml file
+# get tags to build from GH actions file
 grep -E "(debian|ubuntu):" <.github/workflows/build.yml |
   grep -v BASE_IMAGE |
   cut -d '"' -f2 |
