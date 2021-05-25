@@ -20,5 +20,5 @@ RUN set -eux \
       /lib/systemd/system/sysinit.target.wants/systemd-tmpfiles-setup* \
       /lib/systemd/system/systemd-update-utmp*
 
-VOLUME ["/sys/fs/cgroup", "/run"]
+VOLUME ["/sys/fs/cgroup"]
 CMD ["/lib/systemd/systemd"]
