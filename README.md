@@ -9,7 +9,7 @@ Docker containers for systemd testing on Debian based OS.
 ## Build
 
 ```console
-❯ docker build . -t systemd-debian-sid  --build-arg base_system=debian:sid-slim
+❯ docker build . -t systemd-debian-sid  --build-arg base_image=debian:sid-slim
 ```
 
 Example `base_system` arguments :
