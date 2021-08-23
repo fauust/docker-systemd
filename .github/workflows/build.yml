@@ -23,6 +23,7 @@ jobs:
           [
             "debian:9-slim",
             "debian:10-slim",
+            "debian:11-slim",
             "debian:sid-slim",
             "ubuntu:18.04",
             "ubuntu:20.04",

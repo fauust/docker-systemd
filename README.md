@@ -16,6 +16,7 @@ Example `base_system` arguments :
 
 - `debian:9-slim`
 - `debian:10-slim`
+- `debian:11-slim`
 - `debian:sid-slim`
 - `ubuntu:18.04`
 - `ubuntu:20.04`
@@ -29,6 +30,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ```console
 ❯ docker pull fauust/docker-systemd:debian-9
 ❯ docker pull fauust/docker-systemd:debian-10
+❯ docker pull fauust/docker-systemd:debian-11
 ❯ docker pull fauust/docker-systemd:debian-sid
 ❯ docker pull fauust/docker-systemd:ubuntu-18.04
 ❯ docker pull fauust/docker-systemd:ubuntu-20.04
