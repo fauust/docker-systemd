@@ -16,6 +16,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      registry:
+        image: registry:2
+        ports:
+          - 5000:5000
+        # this is needed because we restart the docker daemon for experimental
+        # support
+        options: "--restart always"
     name: ${{ matrix.base_img }}
     strategy:
       matrix:
@@ -35,22 +43,74 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Build ${{ matrix.base_img }}
+      - name: Set up env vars
         run: |
-          export img="${BASE_IMAGE/:/-}"
-          docker build . -t fauust/docker-systemd:${img/-slim/} --build-arg base_image=$BASE_IMAGE
+          set -vx
+          IMG_TMP="${BASE_IMAGE/:/-}"
+          echo "IMG=${IMG_TMP/-slim}">>$GITHUB_ENV
+      - name: Set up Docker Buildx (local builds)
+        uses: docker/setup-buildx-action@v1
+        with:
+          driver-opts: network=host
+      - name: Build ${{ matrix.base_img }}
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: base_image=${{ env.BASE_IMAGE }}
+          push: true
+          tags: localhost:5000/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }}
       - name: Dive check ${{ matrix.base_img }}
         run: |
-          export img="${BASE_IMAGE/:/-}"
-          docker run --rm -i -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/mnt -w /mnt wagoodman/dive:latest --ci fauust/docker-systemd:${img/-slim/}
+          docker run --rm -i -v /var/run/docker.sock:/var/run/docker.sock \
+          -v $(pwd):/mnt -w /mnt wagoodman/dive:latest \
+          --ci localhost:5000/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }}
       - name: Systemd check ${{ matrix.base_img }}
         run: |
-          export img="${BASE_IMAGE/:/-}"
-          docker run --name test-${img/-slim/} -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:${img/-slim/}
+          docker run --name test-${{ env.IMG }} -d --privileged \
+          -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+          localhost:5000/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }}
           # debian 9 takes time to boot
           if [[ "$BASE_IMAGE" == "debian:9-slim" ]]; then
             sleep 100
           else
             sleep 2
           fi
-          docker exec test-${img/-slim/} systemd-analyze
+          docker exec test-${{ env.IMG }} systemd-analyze
+      - name: Check GitHub settings
+        if: >
+          github.event_name == 'push' &&
+          (github.ref == 'refs/heads/master' ||
+          startsWith(github.ref, 'refs/tags/')) &&
+          github.repository == 'fauust/docker-systemd'
+        run: |
+          missing=()
+          [[ -n "${{ secrets.DOCKER_USER }}" ]] || missing+=(DOCKER_USER)
+          [[ -n "${{ secrets.DOCKER_PASSWORD }}" ]] || missing+=(DOCKER_PASSWORD)
+          for i in "${missing[@]}"; do
+            echo "Missing github secret: $i"
+          done
+          (( ${#missing[@]} == 0 )) || exit 1
+          echo "DOCKER_DEPLOY_IMAGES=true" >> $GITHUB_ENV
+      - name: Login to DockerHub
+        if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push images to DockerHub
+        if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
+        run: |
+          msg="Copy multi-arch docker images to DockerHub (${{ env.IMG }})"
+          line="${msg//?/=}"
+          printf "\n${line}\n${msg}\n${line}\n"
+          skopeo copy --all --src-tls-verify=0 \
+          docker://localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.IMG }} \
+          docker://docker.io/${{ secrets.DOCKER_USER }}/${{ env.IMG }}
+      - name: Update DockerHub description
+        if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_USER }}/docker-systemd
+          readme-filepath: README.md
