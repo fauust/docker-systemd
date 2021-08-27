@@ -100,12 +100,12 @@ jobs:
       - name: Push images to DockerHub
         if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
         run: |
-          msg="Copy multi-arch docker images to DockerHub (${{ env.IMG }})"
+          msg="Copy docker images to DockerHub (${{ env.IMG }})"
           line="${msg//?/=}"
           printf "\n${line}\n${msg}\n${line}\n"
           skopeo copy --all --src-tls-verify=0 \
-          docker://localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.IMG }} \
-          docker://docker.io/${{ secrets.DOCKER_USER }}/${{ env.IMG }}
+          docker://localhost:5000/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }} \
+          docker://docker.io/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }}
       - name: Update DockerHub description
         if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
         uses: peter-evans/dockerhub-description@v2
