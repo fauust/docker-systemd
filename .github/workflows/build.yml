@@ -47,6 +47,17 @@ jobs:
         linux/amd64
         linux/arm/v7
         linux/arm64/v8
+    # more arch could be supported here but a mapping distro/arch should be
+    # created because distro do not provide all the same docker architectures.
+    # See:
+    # https://hub.docker.com/_/debian?tab=tags&page=1&ordering=last_updated&name=10
+    # vs
+    # https://hub.docker.com/_/debian?tab=tags&page=1&ordering=last_updated&name=11
+    #
+    # linux/386
+    # linux/ppc64le
+    # linux/riscv64
+    # linux/s390x
 
     steps:
       - uses: actions/checkout@v2

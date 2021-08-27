@@ -3,7 +3,7 @@
 [![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/pre-commit/badge.svg?branch=master)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22pre-commit%22)
 [![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/build/badge.svg?branch=master)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22build%22)
 
-Docker containers for systemd testing on Debian based OS.
+Multi-arch docker containers for systemd testing on Debian based OS.
 
 ## Build
 
