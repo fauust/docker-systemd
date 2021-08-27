@@ -12,6 +12,8 @@ on:
       - .github/workflows/build.yml
       - .dive-ci
       - Dockerfile
+  schedule:
+    - cron: "42 20 * * *"
 
 jobs:
   build:
