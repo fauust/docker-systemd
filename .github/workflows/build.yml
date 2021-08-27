@@ -48,6 +48,7 @@ jobs:
           set -vx
           IMG_TMP="${BASE_IMAGE/:/-}"
           echo "IMG=${IMG_TMP/-slim}">>$GITHUB_ENV
+          echo "REPO=docker-systemd">>$GITHUB_ENV
       - name: Set up Docker Buildx (local builds)
         uses: docker/setup-buildx-action@v1
         with:
@@ -58,17 +59,17 @@ jobs:
           context: .
           build-args: base_image=${{ env.BASE_IMAGE }}
           push: true
-          tags: localhost:5000/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }}
+          tags: localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
       - name: Dive check ${{ matrix.base_img }}
         run: |
           docker run --rm -i -v /var/run/docker.sock:/var/run/docker.sock \
           -v $(pwd):/mnt -w /mnt wagoodman/dive:latest \
-          --ci localhost:5000/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }}
+          --ci localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
       - name: Systemd check ${{ matrix.base_img }}
         run: |
           docker run --name test-${{ env.IMG }} -d --privileged \
           -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
-          localhost:5000/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }}
+          localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
           # debian 9 takes time to boot
           if [[ "$BASE_IMAGE" == "debian:9-slim" ]]; then
             sleep 100
@@ -104,13 +105,13 @@ jobs:
           line="${msg//?/=}"
           printf "\n${line}\n${msg}\n${line}\n"
           skopeo copy --all --src-tls-verify=0 \
-          docker://localhost:5000/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }} \
-          docker://docker.io/${{ secrets.DOCKER_USER }}/docker-systemd:${{ env.IMG }}
+          docker://localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }} \
+          docker://docker.io/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
       - name: Update DockerHub description
         if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: ${{ secrets.DOCKER_USER }}/docker-systemd
+          repository: ${{ secrets.DOCKER_USER }}/${{ env.REPO }}
           readme-filepath: README.md
