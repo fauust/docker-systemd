@@ -13,7 +13,7 @@ on:
       - .dive-ci
       - Dockerfile
   schedule:
-    - cron: '42 10 * * 1'
+    - cron: "42 10 * * 1"
 
 jobs:
   build:
@@ -40,9 +40,9 @@ jobs:
             "ubuntu:20.10",
             "ubuntu:21.04",
           ]
-
     env:
       BASE_IMAGE: ${{ matrix.base_img }}
+      DOCKER_DEPLOY_IMAGES: false
       DOCKER_PLATFORMS: >
         linux/386
         linux/amd64
@@ -60,18 +60,18 @@ jobs:
           echo "IMG=${IMG_TMP/-slim}" >>$GITHUB_ENV
           echo "REPO=docker-systemd" >>$GITHUB_ENV
           echo "DOCKER_BUILD_PLATFORMS=${DOCKER_PLATFORMS// /,}" >>$GITHUB_ENV
-    - name: Enable experimental support
-      run: |
-        config='/etc/docker/daemon.json'
-        if [[ -e "$config" ]]; then
-          sudo sed -i -e 's/{/{ "experimental": true, /' "$config"
-        else
-          echo '{ "experimental": true }' | sudo tee "$config"
-        fi
-        sudo systemctl restart docker
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
-    - name: Set up Docker Buildx (local builds)
+      - name: Enable experimental support
+        run: |
+          config='/etc/docker/daemon.json'
+          if [[ -e "$config" ]]; then
+            sudo sed -i -e 's/{/{ "experimental": true, /' "$config"
+          else
+            echo '{ "experimental": true }' | sudo tee "$config"
+          fi
+          sudo systemctl restart docker
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx (local builds)
         uses: docker/setup-buildx-action@v1
         with:
           driver-opts: network=host
