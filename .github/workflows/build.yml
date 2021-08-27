@@ -59,7 +59,7 @@ jobs:
           IMG_TMP="${BASE_IMAGE/:/-}"
           echo "IMG=${IMG_TMP/-slim}">>$GITHUB_ENV
           echo "REPO=docker-systemd">>$GITHUB_ENV
-          echo "DOCKER_BUILD_PLATFORMS=${DOCKER_PLATFORMS// /,}" >> $GITHUB_ENV
+          echo "DOCKER_BUILD_PLATFORMS=${DOCKER_PLATFORMS// /,}">>$GITHUB_ENV
     - name: Enable experimental support
       run: |
         config='/etc/docker/daemon.json'
