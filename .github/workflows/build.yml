@@ -102,7 +102,7 @@ jobs:
       - name: Push images to DockerHub
         if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
         run: |
-          msg="Copy docker images to DockerHub (${{ env.IMG }})"
+          msg="Push docker image to DockerHub (${{ env.IMG }})"
           line="${msg//?/=}"
           printf "\n${line}\n${msg}\n${line}\n"
           skopeo copy --all --src-tls-verify=0 \
