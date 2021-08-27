@@ -13,7 +13,7 @@ on:
       - .dive-ci
       - Dockerfile
   schedule:
-    - cron: "42 20 * * *"
+    - cron: "42 10 * * 1"
 
 jobs:
   build:
