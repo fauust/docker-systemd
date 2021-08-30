@@ -26,38 +26,29 @@ jobs:
         # this is needed because we restart the docker daemon for experimental
         # support
         options: "--restart always"
-    name: ${{ matrix.base_img }}
+    name: ${{ matrix.image }}
     strategy:
       matrix:
-        base_img:
-          [
-            "debian:9-slim",
-            "debian:10-slim",
-            "debian:11-slim",
-            "debian:sid-slim",
-            "ubuntu:18.04",
-            "ubuntu:20.04",
-            "ubuntu:20.10",
-            "ubuntu:21.04",
-          ]
+        include:
+          - image: debian:9-slim
+            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8
+          - image: debian:10-slim
+            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/mips64le,linux/ppc64le,linux/s390x
+          - image: debian:11-slim
+            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/mips64le,linux/ppc64le,linux/s390x
+          - image: debian:sid-slim
+            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/mips64le,linux/ppc64le,linux/riscv64,linux/s390x
+          - image: ubuntu:18.04
+            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - image: ubuntu:20.04
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
+          - image: ubuntu:20.10
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
+          - image: ubuntu:21.04
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
     env:
-      BASE_IMAGE: ${{ matrix.base_img }}
+      BASE_IMAGE: ${{ matrix.image }}
       DOCKER_DEPLOY_IMAGES: false
-      DOCKER_PLATFORMS: >
-        linux/amd64
-        linux/arm/v7
-        linux/arm64/v8
-    # more arch could be supported here but a mapping distro/arch should be
-    # created because distro do not provide all the same docker architectures.
-    # See:
-    # https://hub.docker.com/_/debian?tab=tags&page=1&ordering=last_updated&name=10
-    # vs
-    # https://hub.docker.com/_/debian?tab=tags&page=1&ordering=last_updated&name=11
-    #
-    # linux/386
-    # linux/ppc64le
-    # linux/riscv64
-    # linux/s390x
 
     steps:
       - uses: actions/checkout@v2
@@ -67,7 +58,7 @@ jobs:
           IMG_TMP="${BASE_IMAGE/:/-}"
           echo "IMG=${IMG_TMP/-slim}" >>$GITHUB_ENV
           echo "REPO=docker-systemd" >>$GITHUB_ENV
-          echo "DOCKER_BUILD_PLATFORMS=${DOCKER_PLATFORMS// /,}" >>$GITHUB_ENV
+          # echo "DOCKER_BUILD_PLATFORMS=${DOCKER_PLATFORMS// /,}" >>$GITHUB_ENV
       - name: Enable experimental support
         run: |
           config='/etc/docker/daemon.json'
@@ -87,8 +78,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          build-args: base_image=${{ env.BASE_IMAGE }}
-          platforms: ${{ env.DOCKER_BUILD_PLATFORMS }}
+          build-args: base_image=${{ matrix.image }}
+          platforms: ${{ matrix.platforms }}
           push: true
           tags: localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
       - name: Dive check

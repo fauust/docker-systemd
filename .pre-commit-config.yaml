@@ -1,18 +1,17 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.0.1
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
-      - id: check-executables-have-shebangs
       - id: check-yaml
         name: Check yaml files
       - id: trailing-whitespace
         name: Check trailing whitespace
         args: [--markdown-linebreak-ext=md]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.26.0
+    rev: v1.26.3
     hooks:
       - id: yamllint
         name: Check yaml files (yamllint)
@@ -23,16 +22,6 @@ repos:
         entry: markdownlint/markdownlint -r "~MD013"
         language: docker_image
         types: [markdown]
-      - id: docker-shell-shfmt
-        name: Run shfmt with docker
-        entry: mvdan/shfmt:v3.2.2 -d -i 2 -ci
-        language: docker_image
-        types: [shell]
-      - id: docker-shell-lint
-        name: Run shellcheck with docker
-        language: docker_image
-        entry: koalaman/shellcheck:stable
-        types: [shell]
       - id: docker-hadolint
         name: Run hadolint with docker
         language: docker_image
