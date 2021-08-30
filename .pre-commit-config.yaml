@@ -53,3 +53,11 @@ repos:
         entry: lycheeverse/lychee
         language: docker_image
         types: [markdown]
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.1.0
+    hooks:
+      - id: codespell
+        name: Checks for common misspellings in text files
+        entry: codespell
+        language: python
+        types: [text]
