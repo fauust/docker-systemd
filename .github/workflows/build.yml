@@ -100,9 +100,8 @@ jobs:
           docker exec test-${{ env.IMG }} systemd-analyze
       - name: Check GitHub settings
         if: >
-          github.event_name == 'push' &&
-          (github.ref == 'refs/heads/master' ||
-          startsWith(github.ref, 'refs/tags/')) &&
+          (github.event_name == 'push' || github.event_name == 'schedule') &&
+          (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')) &&
           github.repository == 'fauust/docker-systemd'
         run: |
           missing=()
