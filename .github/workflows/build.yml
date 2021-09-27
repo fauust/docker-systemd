@@ -28,6 +28,7 @@ jobs:
         options: "--restart always"
     name: ${{ matrix.image }}
     strategy:
+      fail-fast: false
       matrix:
         include:
           - image: debian:9-slim
