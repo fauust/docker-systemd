@@ -107,7 +107,7 @@ jobs:
         run: |
           missing=()
           [[ -n "${{ secrets.DOCKER_USER }}" ]] || missing+=(DOCKER_USER)
-          [[ -n "${{ secrets.DOCKER_PASSWORD }}" ]] || missing+=(DOCKER_PASSWORD)
+          [[ -n "${{ secrets.DOCKER_TOKEN }}" ]] || missing+=(DOCKER_TOKEN)
           for i in "${missing[@]}"; do
             echo "Missing github secret: $i"
           done
@@ -118,7 +118,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_TOKEN }}
       - name: Push images to DockerHub
         if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
         run: |
