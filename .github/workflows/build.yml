@@ -81,6 +81,7 @@ jobs:
           push: true
           tags: localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
       - name: Dive check
+        if: ${{ matrix.image != 'debian:sid-slim' }}
         run: |
           docker run --rm -i -v /var/run/docker.sock:/var/run/docker.sock \
           -v $(pwd):/mnt -w /mnt wagoodman/dive:latest \
