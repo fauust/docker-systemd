@@ -1,5 +1,0 @@
-# https://github.com/wagoodman/dive#ci-integration
-rules:
-  lowestEfficiency: 0.95
-  highestWastedBytes: 8MB
-  highestUserWastedPercent: 0.40

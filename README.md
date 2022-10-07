@@ -3,12 +3,13 @@
 [![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/pre-commit/badge.svg?branch=main)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22pre-commit%22)
 [![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/build/badge.svg?branch=main)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22build%22)
 
-Multi-arch docker containers for systemd testing on Debian based OS.
+Multi-arch docker containers for systemd testing.
 
 ## Build
 
 ```console
-❯ docker build . -t systemd-debian-sid  --build-arg base_image=debian:sid-slim
+❯ docker build . -f Dockerfile.debian -t systemd-debian-sid  --build-arg base_image=debian:sid-slim
+❯ docker build . -f Dockerfile.redhat -t systemd-almalinux-8  --build-arg base_image=almalinux:8
 ```
 
 Example `base_system` arguments :
@@ -21,6 +22,12 @@ Example `base_system` arguments :
 - `ubuntu:20.04`
 - `ubuntu:21.04`
 - `ubuntu:22.04`
+- `fedora:36`
+- `fedora:37`
+- `almalinux:8`
+- `almalinux:9`
+- `rockylinux:8`
+- `rockylinux:9`
 
 You can also use "non-slim" Debian images (`debian:10`) but we only build images
 based on `-slim` versions of Debian images.
@@ -36,6 +43,12 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull fauust/docker-systemd:ubuntu-20.04
 ❯ docker pull fauust/docker-systemd:ubuntu-21.04
 ❯ docker pull fauust/docker-systemd:ubuntu-22.04
+❯ docker pull fauust/docker-systemd:fedora-36
+❯ docker pull fauust/docker-systemd:fedora-37
+❯ docker pull fauust/docker-systemd:almalinux-8
+❯ docker pull fauust/docker-systemd:almalinux-9
+❯ docker pull fauust/docker-systemd:rockylinux-8
+❯ docker pull fauust/docker-systemd:rockylinux-9
 ```
 
 ## Usage (docker)

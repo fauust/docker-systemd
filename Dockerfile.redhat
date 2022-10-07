@@ -1,0 +1,28 @@
+ARG base_image=fedora:36
+FROM "$base_image"
+
+RUN set -eux \
+    && dnf -y install \
+      bash \
+      systemd \
+      systemd-sysv \
+    # clean systemd \
+    && rm -rf /etc/systemd/system/*.wants/* \
+      /lib/systemd/system/local-fs.target.wants/* \
+      /lib/systemd/system/multi-user.target.wants/* \
+      /lib/systemd/system/sockets.target.wants/*initctl* \
+      /lib/systemd/system/sockets.target.wants/*udev* \
+      /lib/systemd/system/sysinit.target.wants/systemd-tmpfiles-setup* \
+      /lib/systemd/system/systemd-update-utmp* \
+    # clean doc \
+    && rm -rf /usr/share/doc \
+      /usr/share/man \
+    # clean dnf/rpm \
+    && rm -rf /usr/lib/sysimage/rpm/* \
+      /var/lib/dnf/* \
+      /var/lib/rpm/Packages \
+      /var/lib/rpm/* \
+    && dnf clean all
+
+VOLUME ["/sys/fs/cgroup"]
+CMD ["/lib/systemd/systemd"]

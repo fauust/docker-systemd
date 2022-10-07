@@ -5,13 +5,13 @@ on:
   push:
     paths:
       - .github/workflows/build.yml
-      - .dive-ci
-      - Dockerfile
+      - Dockerfile.debian
+      - Dockerfile.redhat
   pull_request:
     paths:
       - .github/workflows/build.yml
-      - .dive-ci
-      - Dockerfile
+      - Dockerfile.debian
+      - Dockerfile.redhat
   schedule:
     - cron: "42 10 * * 1"
 
@@ -32,19 +32,44 @@ jobs:
       matrix:
         include:
           - image: debian:9-slim
+            dockerfile: Dockerfile.debian
             platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8
           - image: debian:10-slim
+            dockerfile: Dockerfile.debian
             platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8
           - image: debian:11-slim
+            dockerfile: Dockerfile.debian
             platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/mips64le,linux/ppc64le,linux/s390x
           - image: debian:sid-slim
-            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/mips64le,linux/ppc64le,linux/riscv64,linux/s390x
+            dockerfile: Dockerfile.debian
+            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/mips64le,linux/ppc64le,linux/s390x
           - image: ubuntu:18.04
+            dockerfile: Dockerfile.debian
             platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           - image: ubuntu:20.04
-            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
+            dockerfile: Dockerfile.debian
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           - image: ubuntu:22.04
-            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
+            dockerfile: Dockerfile.debian
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - image: fedora:36
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - image: fedora:37
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - image: almalinux:8
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - image: almalinux:9
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - image: rockylinux:8
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8
+          - image: rockylinux:9
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8
     env:
       BASE_IMAGE: ${{ matrix.image }}
       DOCKER_DEPLOY_IMAGES: false
@@ -76,16 +101,11 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          file: ${{ matrix.dockerfile }}
           build-args: base_image=${{ matrix.image }}
           platforms: ${{ matrix.platforms }}
           push: true
           tags: localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
-      - name: Dive check
-        if: ${{ matrix.image != 'debian:sid-slim' }}
-        run: |
-          docker run --rm -i -v /var/run/docker.sock:/var/run/docker.sock \
-          -v $(pwd):/mnt -w /mnt wagoodman/dive:latest \
-          --ci localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
       - name: Systemd check
         run: |
           docker run --name test-${{ env.IMG }} -d --privileged \
