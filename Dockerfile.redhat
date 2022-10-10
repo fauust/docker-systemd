@@ -18,10 +18,6 @@ RUN set -eux \
     && rm -rf /usr/share/doc \
       /usr/share/man \
     # clean dnf/rpm \
-    && rm -rf /usr/lib/sysimage/rpm/* \
-      /var/lib/dnf/* \
-      /var/lib/rpm/Packages \
-      /var/lib/rpm/* \
     && dnf clean all
 
 VOLUME ["/sys/fs/cgroup"]
