@@ -23,9 +23,6 @@ jobs:
         image: registry:2
         ports:
           - 5000:5000
-        # this is needed because we restart the docker daemon for experimental
-        # support
-        options: "--restart always"
     name: ${{ matrix.image }}
     strategy:
       fail-fast: false
@@ -82,42 +79,38 @@ jobs:
           IMG_TMP="${BASE_IMAGE/:/-}"
           echo "IMG=${IMG_TMP/-slim}" >>$GITHUB_ENV
           echo "REPO=docker-systemd" >>$GITHUB_ENV
-      - name: Enable experimental support
+      - name: Install qemu-user-static
         run: |
-          config='/etc/docker/daemon.json'
-          if [[ -e "$config" ]]; then
-            sudo sed -i -e 's/{/{ "experimental": true, /' "$config"
-          else
-            echo '{ "experimental": true }' | sudo tee "$config"
-          fi
-          sudo systemctl restart docker
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx (local builds)
-        uses: docker/setup-buildx-action@v2
-        with:
-          driver-opts: network=host
-      - name: Build
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ${{ matrix.dockerfile }}
-          build-args: base_image=${{ matrix.image }}
-          platforms: ${{ matrix.platforms }}
-          push: true
-          tags: localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+      - name: Build images
+        run: |
+          podman manifest create ${{ env.REPO }}:${{ env.IMG }}
+          for arch in $(echo ${{ matrix.platforms }} | sed 's/,/ /g'); do
+            msg="Build $arch:"
+            line="${msg//?/=}"
+            printf "\n${line}\n${msg}\n${line}\n"
+            podman buildx build --tag ${{ env.REPO }}:${{ env.IMG }}-${arch//\//-} \
+              --platform $arch \
+              --manifest ${{ env.REPO }}:${{ env.IMG }} \
+              -f ${{ matrix.dockerfile }} \
+              --build-arg base_image=${{ matrix.image }}
+          done
+          podman images
+          podman manifest push --tls-verify=0 \
+            --all ${{ env.REPO }}:${{ env.IMG }} \
+            docker://localhost:5000/${{ env.REPO }}:${{ env.IMG }}
       - name: Systemd check
         run: |
-          docker run --name test-${{ env.IMG }} -d --privileged \
-          -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
-          localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
+          podman run --tls-verify=0 --name sys-test --rm -d \
+            docker://localhost:5000/${{ env.REPO }}:${{ env.IMG }}
           # debian 9 takes time to boot
           if [[ "$BASE_IMAGE" == "debian:9-slim" ]]; then
             sleep 100
           else
             sleep 2
           fi
-          docker exec test-${{ env.IMG }} systemd-analyze
+          podman exec -it sys-test systemd-analyze
       - name: Check GitHub settings
         if: >
           (github.event_name == 'push' || github.event_name == 'schedule') &&
@@ -145,8 +138,8 @@ jobs:
           line="${msg//?/=}"
           printf "\n${line}\n${msg}\n${line}\n"
           skopeo copy --all --src-tls-verify=0 \
-          docker://localhost:5000/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }} \
-          docker://docker.io/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
+            docker://localhost:5000/${{ env.REPO }}:${{ env.IMG }} \
+            docker://docker.io/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
       - name: Update DockerHub description
         if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
         uses: peter-evans/dockerhub-description@v3
