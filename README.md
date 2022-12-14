@@ -4,6 +4,10 @@
 [![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/build/badge.svg?branch=main)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22build%22)
 
 Multi-arch docker containers for systemd testing.
+Images are available on:
+
+- ghcr.io
+- docker.io
 
 ## Build
 

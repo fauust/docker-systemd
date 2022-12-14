@@ -125,22 +125,38 @@ jobs:
           done
           (( ${#missing[@]} == 0 )) || exit 1
           echo "DOCKER_DEPLOY_IMAGES=true" >> $GITHUB_ENV
-      - name: Login to DockerHub
+      - name: Login to ghcr.io
+        if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push images to ghcr.io
+        if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
+        run: |
+          msg="Push docker image to ghcr.io (${{ env.IMG }})"
+          line="${msg//?/=}"
+          printf "\n${line}\n${msg}\n${line}\n"
+          skopeo copy --all --src-tls-verify=0 \
+            docker://localhost:5000/${{ env.REPO }}:${{ env.IMG }} \
+            docker://ghcr.io/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
+      - name: Login to docker.io
         if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - name: Push images to DockerHub
+      - name: Push images to docker.io
         if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
         run: |
-          msg="Push docker image to DockerHub (${{ env.IMG }})"
+          msg="Push docker image to docker.io (${{ env.IMG }})"
           line="${msg//?/=}"
           printf "\n${line}\n${msg}\n${line}\n"
           skopeo copy --all --src-tls-verify=0 \
             docker://localhost:5000/${{ env.REPO }}:${{ env.IMG }} \
             docker://docker.io/${{ secrets.DOCKER_USER }}/${{ env.REPO }}:${{ env.IMG }}
-      - name: Update DockerHub description
+      - name: Update docker.io description
         if: ${{ env.DOCKER_DEPLOY_IMAGES == 'true' }}
         uses: peter-evans/dockerhub-description@v3
         with:
