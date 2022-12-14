@@ -97,6 +97,8 @@ jobs:
               --build-arg base_image=${{ matrix.image }}
           done
           podman images
+      - name: Push images to local registry
+        run: |
           podman manifest push --tls-verify=0 \
             --all ${{ env.REPO }}:${{ env.IMG }} \
             docker://localhost:5000/${{ env.REPO }}:${{ env.IMG }}
