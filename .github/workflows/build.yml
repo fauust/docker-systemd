@@ -37,6 +37,9 @@ jobs:
           - image: debian:11-slim
             dockerfile: Dockerfile.debian
             platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - image: debian:bookworm-slim
+            dockerfile: Dockerfile.debian
+            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           - image: debian:sid-slim
             dockerfile: Dockerfile.debian
             platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
@@ -77,7 +80,11 @@ jobs:
         run: |
           set -vx
           IMG_TMP="${BASE_IMAGE/:/-}"
-          echo "IMG=${IMG_TMP/-slim}" >>$GITHUB_ENV
+          if [[ $IMG_TMP == "debian-bookworm-slim" ]]; then
+            echo "IMG=debian-12" >>$GITHUB_ENV
+          else
+            echo "IMG=${IMG_TMP/-slim}" >>$GITHUB_ENV
+          fi
           echo "REPO=docker-systemd" >>$GITHUB_ENV
       - name: Install qemu-user-static
         run: |
