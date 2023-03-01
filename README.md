@@ -21,6 +21,7 @@ Example `base_system` arguments :
 - `debian:9-slim`
 - `debian:10-slim`
 - `debian:11-slim`
+- `debian:bookworm-slim`
 - `debian:sid-slim`
 - `ubuntu:18.04`
 - `ubuntu:20.04`
@@ -33,7 +34,7 @@ Example `base_system` arguments :
 - `rockylinux:8`
 - `rockylinux:9`
 
-You can also use "non-slim" Debian images (`debian:10`) but we only build images
+You can also use "non-slim" Debian images (`debian:11`) but we only build images
 based on `-slim` versions of Debian images.
 
 The following containers are available from [Docker Hub](https://hub.docker.com/r/fauust/docker-systemd).
@@ -42,6 +43,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull fauust/docker-systemd:debian-9
 ❯ docker pull fauust/docker-systemd:debian-10
 ❯ docker pull fauust/docker-systemd:debian-11
+❯ docker pull fauust/docker-systemd:debian-12
 ❯ docker pull fauust/docker-systemd:debian-sid
 ❯ docker pull fauust/docker-systemd:ubuntu-18.04
 ❯ docker pull fauust/docker-systemd:ubuntu-20.04
