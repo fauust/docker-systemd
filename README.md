@@ -24,7 +24,6 @@ Example `base_system` arguments :
 - `debian:sid-slim`
 - `ubuntu:18.04`
 - `ubuntu:20.04`
-- `ubuntu:21.04`
 - `ubuntu:22.04`
 - `ubuntu:23.04`
 - `fedora:36`
@@ -47,7 +46,6 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull fauust/docker-systemd:debian-sid
 ❯ docker pull fauust/docker-systemd:ubuntu-18.04
 ❯ docker pull fauust/docker-systemd:ubuntu-20.04
-❯ docker pull fauust/docker-systemd:ubuntu-21.04
 ❯ docker pull fauust/docker-systemd:ubuntu-22.04
 ❯ docker pull fauust/docker-systemd:ubuntu-23.04
 ❯ docker pull fauust/docker-systemd:fedora-36
