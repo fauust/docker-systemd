@@ -18,7 +18,6 @@ Images are available on:
 
 Example `base_system` arguments :
 
-- `debian:9-slim`
 - `debian:10-slim`
 - `debian:11-slim`
 - `debian:bookworm-slim`
@@ -27,8 +26,10 @@ Example `base_system` arguments :
 - `ubuntu:20.04`
 - `ubuntu:21.04`
 - `ubuntu:22.04`
+- `ubuntu:23.04`
 - `fedora:36`
 - `fedora:37`
+- `fedora:38`
 - `almalinux:8`
 - `almalinux:9`
 - `rockylinux:8`
@@ -40,7 +41,6 @@ based on `-slim` versions of Debian images.
 The following containers are available from [Docker Hub](https://hub.docker.com/r/fauust/docker-systemd).
 
 ```console
-❯ docker pull fauust/docker-systemd:debian-9
 ❯ docker pull fauust/docker-systemd:debian-10
 ❯ docker pull fauust/docker-systemd:debian-11
 ❯ docker pull fauust/docker-systemd:debian-12
@@ -49,8 +49,10 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull fauust/docker-systemd:ubuntu-20.04
 ❯ docker pull fauust/docker-systemd:ubuntu-21.04
 ❯ docker pull fauust/docker-systemd:ubuntu-22.04
+❯ docker pull fauust/docker-systemd:ubuntu-23.04
 ❯ docker pull fauust/docker-systemd:fedora-36
 ❯ docker pull fauust/docker-systemd:fedora-37
+❯ docker pull fauust/docker-systemd:fedora-38
 ❯ docker pull fauust/docker-systemd:almalinux-8
 ❯ docker pull fauust/docker-systemd:almalinux-9
 ❯ docker pull fauust/docker-systemd:rockylinux-8
