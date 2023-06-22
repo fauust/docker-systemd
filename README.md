@@ -20,7 +20,7 @@ Example `base_system` arguments :
 
 - `debian:10-slim`
 - `debian:11-slim`
-- `debian:bookworm-slim`
+- `debian:12-slim`
 - `debian:sid-slim`
 - `ubuntu:18.04`
 - `ubuntu:20.04`
