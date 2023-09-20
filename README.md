@@ -3,7 +3,7 @@
 [![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/pre-commit/badge.svg?branch=main)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22pre-commit%22)
 [![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/build/badge.svg?branch=main)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22build%22)
 
-Multi-arch docker containers for systemd testing.
+Multi-arch docker containers for systemd/openrc testing.
 Images are available on:
 
 - ghcr.io
@@ -14,6 +14,7 @@ Images are available on:
 ```console
 ❯ docker build . -f Dockerfile.debian -t systemd-debian-sid  --build-arg base_image=debian:sid-slim
 ❯ docker build . -f Dockerfile.redhat -t systemd-almalinux-8  --build-arg base_image=almalinux:8
+❯ docker build . -f Dockerfile.alpine -t openrc-alpine3.18  --build-arg base_image=alpine:3.18
 ```
 
 Example `base_system` arguments :
@@ -32,6 +33,7 @@ Example `base_system` arguments :
 - `almalinux:9`
 - `rockylinux:8`
 - `rockylinux:9`
+- `alpine:3.18`
 
 You can also use "non-slim" Debian images (`debian:11`) but we only build images
 based on `-slim` versions of Debian images.
@@ -39,20 +41,21 @@ based on `-slim` versions of Debian images.
 The following containers are available from [Docker Hub](https://hub.docker.com/r/fauust/docker-systemd).
 
 ```console
-❯ docker pull fauust/docker-systemd:debian-10
-❯ docker pull fauust/docker-systemd:debian-11
-❯ docker pull fauust/docker-systemd:debian-12
-❯ docker pull fauust/docker-systemd:debian-sid
-❯ docker pull fauust/docker-systemd:ubuntu-18.04
-❯ docker pull fauust/docker-systemd:ubuntu-20.04
-❯ docker pull fauust/docker-systemd:ubuntu-22.04
-❯ docker pull fauust/docker-systemd:ubuntu-23.04
-❯ docker pull fauust/docker-systemd:fedora-37
-❯ docker pull fauust/docker-systemd:fedora-38
-❯ docker pull fauust/docker-systemd:almalinux-8
-❯ docker pull fauust/docker-systemd:almalinux-9
-❯ docker pull fauust/docker-systemd:rockylinux-8
-❯ docker pull fauust/docker-systemd:rockylinux-9
+❯ docker pull ghcr.io/fauust/docker-systemd:debian-10
+❯ docker pull ghcr.io/fauust/docker-systemd:debian-11
+❯ docker pull ghcr.io/fauust/docker-systemd:debian-12
+❯ docker pull ghcr.io/fauust/docker-systemd:debian-sid
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-18.04
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-20.04
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-22.04
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-23.04
+❯ docker pull ghcr.io/fauust/docker-systemd:fedora-37
+❯ docker pull ghcr.io/fauust/docker-systemd:fedora-38
+❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-8
+❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-9
+❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-8
+❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-9
+❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.18
 ```
 
 ## Usage (docker)
@@ -66,8 +69,8 @@ You can also use [podman](https://podman.io/) that does not require it, see
 below.
 
 ```console
-❯ docker run --name sys-test --rm --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:debian-10
-❯ docker exec -it sys-test bash
+❯ docker run --name init-test --rm --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:debian-10
+❯ docker exec -it init-test bash
 root@59c9e3e924e7:/# apt update && apt install procps
 ...
 root@59c9e3e924e7:/# ps fax
@@ -86,8 +89,8 @@ Podman is much more "systemd friendly", see
 Here is how to use those containers with podman:
 
 ```console
-❯ podman run --name sys-test --rm -d fauust/docker-systemd:debian-10
-❯ podman exec -it sys-test bash
+❯ podman run --name init-test --rm -d fauust/docker-systemd:debian-10
+❯ podman exec -it init-test bash
 root@181cc7d48a8a:/# apt update && apt install procps
 ...
 root@181cc7d48a8a:/# ps fax
