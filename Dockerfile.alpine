@@ -1,7 +1,8 @@
 ARG base_image=alpine:latest
 FROM "$base_image"
 
-RUN apk add --update --no-cache \
+RUN set -eux \
+  && apk add --update --no-cache \
     openrc \
   && sed -i 's/^\(tty\d\:\:\)/#\1/g' /etc/inittab \
   && sed -i \
