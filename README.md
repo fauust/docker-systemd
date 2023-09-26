@@ -33,6 +33,7 @@ Example `base_system` arguments :
 - `almalinux:9`
 - `rockylinux:8`
 - `rockylinux:9`
+- `alpine:3.17`
 - `alpine:3.18`
 
 You can also use "non-slim" Debian images (`debian:11`) but we only build images
@@ -55,6 +56,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-9
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-8
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-9
+❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.17
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.18
 ```
 
