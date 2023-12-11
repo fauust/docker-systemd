@@ -27,6 +27,7 @@ Example `base_system` arguments :
 - `ubuntu:20.04`
 - `ubuntu:22.04`
 - `ubuntu:23.04`
+- `ubuntu:23.10`
 - `fedora:37`
 - `fedora:38`
 - `fedora:39`
@@ -52,6 +53,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-20.04
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-22.04
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-23.04
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-23.10
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-37
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-38
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-39
