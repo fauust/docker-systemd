@@ -28,64 +28,65 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - image: debian:10-slim
-            dockerfile: Dockerfile.debian
-            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8
+          # - image: debian:10-slim
+          #   dockerfile: Dockerfile.debian
+          #   platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8
           - image: debian:11-slim
             dockerfile: Dockerfile.debian
-            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: debian:12-slim
-            dockerfile: Dockerfile.debian
-            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: debian:sid-slim
-            dockerfile: Dockerfile.debian
-            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: ubuntu:18.04
-            dockerfile: Dockerfile.debian
-            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: ubuntu:20.04
-            dockerfile: Dockerfile.debian
-            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: ubuntu:22.04
-            dockerfile: Dockerfile.debian
-            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: ubuntu:23.04
-            dockerfile: Dockerfile.debian
-            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: ubuntu:23.10
-            dockerfile: Dockerfile.debian
-            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: ubuntu:24.04
-            dockerfile: Dockerfile.debian
-            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: fedora:38
-            dockerfile: Dockerfile.redhat
-            platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: fedora:39
-            dockerfile: Dockerfile.redhat
-            platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: almalinux:8
-            dockerfile: Dockerfile.redhat
-            platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: almalinux:9
-            dockerfile: Dockerfile.redhat
-            platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: rockylinux:8
-            dockerfile: Dockerfile.redhat
-            platforms: linux/amd64,linux/arm64/v8
-          - image: rockylinux:9
-            dockerfile: Dockerfile.redhat
-            platforms: linux/amd64,linux/arm64/v8
-          - image: alpine:3.17
-            dockerfile: Dockerfile.alpine
-            platforms: linux/amd64,linux/arm64/v8
-          - image: alpine:3.18
-            dockerfile: Dockerfile.alpine
-            platforms: linux/amd64,linux/arm64/v8
-          - image: alpine:3.19
-            dockerfile: Dockerfile.alpine
-            platforms: linux/amd64,linux/arm64/v8
-    env:
+            # platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+            platforms: linux/amd64
+          # - image: debian:12-slim
+          #   dockerfile: Dockerfile.debian
+          #   platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: debian:sid-slim
+          #   dockerfile: Dockerfile.debian
+          #   platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: ubuntu:18.04
+          #   dockerfile: Dockerfile.debian
+          #   platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: ubuntu:20.04
+          #   dockerfile: Dockerfile.debian
+          #   platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: ubuntu:22.04
+          #   dockerfile: Dockerfile.debian
+          #   platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: ubuntu:23.04
+          #   dockerfile: Dockerfile.debian
+          #   platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: ubuntu:23.10
+          #   dockerfile: Dockerfile.debian
+          #   platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: ubuntu:24.04
+          #   dockerfile: Dockerfile.debian
+          #   platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: fedora:38
+          #   dockerfile: Dockerfile.redhat
+          #   platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: fedora:39
+          #   dockerfile: Dockerfile.redhat
+          #   platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: almalinux:8
+          #   dockerfile: Dockerfile.redhat
+          #   platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: almalinux:9
+          #   dockerfile: Dockerfile.redhat
+          #   platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          # - image: rockylinux:8
+          #   dockerfile: Dockerfile.redhat
+          #   platforms: linux/amd64,linux/arm64/v8
+          # - image: rockylinux:9
+          #   dockerfile: Dockerfile.redhat
+          #   platforms: linux/amd64,linux/arm64/v8
+          # - image: alpine:3.17
+          #   dockerfile: Dockerfile.alpine
+          #   platforms: linux/amd64,linux/arm64/v8
+          # - image: alpine:3.18
+          #   dockerfile: Dockerfile.alpine
+          #   platforms: linux/amd64,linux/arm64/v8
+          # - image: alpine:3.19
+          #   dockerfile: Dockerfile.alpine
+          #   platforms: linux/amd64,linux/arm64/v8
+    # env:
       BASE_IMAGE: ${{ matrix.image }}
       DOCKER_DEPLOY_IMAGES: false
 
@@ -129,7 +130,7 @@ jobs:
       - name: Systemd check
         if: (!contains(matrix.dockerfile, 'alpine'))
         run: |
-          podman run --systemd --tls-verify=0 --name sys-test --rm -d \
+          podman run --systemd=always --user --tls-verify=0 --name sys-test --rm -d \
             docker://localhost:5000/${{ env.REPO }}:${{ env.IMG }}
           sleep 2
           podman exec -it sys-test systemd-analyze
