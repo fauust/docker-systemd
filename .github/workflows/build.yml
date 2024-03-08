@@ -129,14 +129,9 @@ jobs:
       - name: Systemd check
         if: (!contains(matrix.dockerfile, 'alpine'))
         run: |
-          podman run --tls-verify=0 --name sys-test --rm -d \
+          podman run --systemd --tls-verify=0 --name sys-test --rm -d \
             docker://localhost:5000/${{ env.REPO }}:${{ env.IMG }}
-          # debian 9 takes time to boot
-          if [[ "$BASE_IMAGE" == "debian:9-slim" ]]; then
-            sleep 100
-          else
-            sleep 2
-          fi
+          sleep 2
           podman exec -it sys-test systemd-analyze
       - name: OpenRC check
         if: (contains(matrix.dockerfile, 'alpine'))
