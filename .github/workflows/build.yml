@@ -130,7 +130,7 @@ jobs:
       - name: Systemd check
         if: (!contains(matrix.dockerfile, 'alpine'))
         run: |
-          podman run --systemd=always --user --tls-verify=0 --name sys-test --rm -d \
+          podman run --systemd always --tls-verify=0 --name sys-test --rm -d \
             docker://localhost:5000/${{ env.REPO }}:${{ env.IMG }}
           sleep 2
           podman exec -it sys-test systemd-analyze
