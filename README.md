@@ -1,7 +1,7 @@
 # docker-systemd
 
-[![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/pre-commit/badge.svg?branch=main)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22pre-commit%22)
-[![GitHub Actions](https://github.com/fauust/docker-systemd/workflows/build/badge.svg?branch=main)](https://github.com/fauust/docker-systemd/actions?query=workflow%3A%22build%22)
+[![pre-commit](https://github.com/fauust/docker-ansible/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/fauust/docker-ansible/actions/workflows/pre-commit.yml)
+[![build](https://github.com/fauust/docker-ansible/actions/workflows/build.yml/badge.svg)](https://github.com/fauust/docker-ansible/actions/workflows/build.yml)
 
 Multi-arch docker containers for systemd/openrc testing.
 Images are available on:
