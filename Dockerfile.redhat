@@ -1,4 +1,4 @@
-ARG base_image=fedora:38
+ARG base_image=fedora:39
 FROM "$base_image"
 
 RUN set -eux \

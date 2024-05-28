@@ -29,8 +29,8 @@ Example `base_system` arguments :
 - `ubuntu:23.04`
 - `ubuntu:23.10`
 - `ubuntu:24.04`
-- `fedora:38`
 - `fedora:39`
+- `fedora:40`
 - `almalinux:8`
 - `almalinux:9`
 - `rockylinux:8`
@@ -55,8 +55,8 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-23.04
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-23.10
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-24.04
-❯ docker pull ghcr.io/fauust/docker-systemd:fedora-38
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-39
+❯ docker pull ghcr.io/fauust/docker-systemd:fedora-40
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-8
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-9
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-8
