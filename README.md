@@ -19,7 +19,6 @@ Images are available on:
 
 Example `base_system` arguments :
 
-- `debian:10-slim`
 - `debian:11-slim`
 - `debian:12-slim`
 - `debian:sid-slim`
@@ -44,7 +43,6 @@ based on `-slim` versions of Debian images.
 The following containers are available from [Docker Hub](https://hub.docker.com/r/fauust/docker-systemd).
 
 ```console
-❯ docker pull ghcr.io/fauust/docker-systemd:debian-10
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-11
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-12
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-sid
@@ -75,7 +73,7 @@ You can also use [podman](https://podman.io/) that does not require it, see
 below.
 
 ```console
-❯ docker run --name init-test --rm --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:debian-10
+❯ docker run --name init-test --rm --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro fauust/docker-systemd:debian-sid
 ❯ docker exec -it init-test bash
 root@59c9e3e924e7:/# apt update && apt install procps
 ...
@@ -95,7 +93,7 @@ Podman is much more "systemd friendly", see
 Here is how to use those containers with podman:
 
 ```console
-❯ podman run --name init-test --rm -d fauust/docker-systemd:debian-10
+❯ podman run --name init-test --rm -d fauust/docker-systemd:debian-sid
 ❯ podman exec -it init-test bash
 root@181cc7d48a8a:/# apt update && apt install procps
 ...
