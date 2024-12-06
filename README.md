@@ -14,7 +14,7 @@ Images are available on:
 ```console
 ❯ docker build . -f Dockerfile.debian -t systemd-debian-sid  --build-arg base_image=debian:sid-slim
 ❯ docker build . -f Dockerfile.redhat -t systemd-almalinux-8  --build-arg base_image=almalinux:8
-❯ docker build . -f Dockerfile.alpine -t openrc-alpine3.18  --build-arg base_image=alpine:3.18
+❯ docker build . -f Dockerfile.alpine -t openrc-alpine3.20  --build-arg base_image=alpine:3.20
 ```
 
 Example `base_system` arguments :
@@ -36,6 +36,7 @@ Example `base_system` arguments :
 - `alpine:3.18`
 - `alpine:3.19`
 - `alpine:3.20`
+- `alpine:3.21`
 
 You can also use "non-slim" Debian images (`debian:11`) but we only build images
 based on `-slim` versions of Debian images.
@@ -60,6 +61,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.18
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.19
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.20
+❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.21
 ```
 
 ## Usage (docker)
