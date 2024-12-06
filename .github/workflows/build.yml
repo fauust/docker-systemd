@@ -5,11 +5,13 @@ on:
   push:
     paths:
       - .github/workflows/build.yml
+      - Dockerfile.alpine
       - Dockerfile.debian
       - Dockerfile.redhat
   pull_request:
     paths:
       - .github/workflows/build.yml
+      - Dockerfile.alpine
       - Dockerfile.debian
       - Dockerfile.redhat
   schedule:
