@@ -19,13 +19,16 @@ RUN set -eux \
       /etc/init.d/modules \
       /etc/init.d/modules-load \
       /etc/init.d/modloop \
-  && if [ "$VERSION_ID" = "3.21*" ]; then \
-       OPENRC_RUN="/usr/libexec/rc/sh/openrc-run.sh"; \
-       INIT="/usr/libexec/rc/sh/init.sh"; \
-     else \
+  && case $VERSION_ID in \
+       3.21*) \
+         OPENRC_RUN="/usr/libexec/rc/sh/openrc-run.sh"; \
+         INIT="/usr/libexec/rc/sh/init.sh"; \
+       ;; \
+       *) \
        OPENRC_RUN="/lib/rc/sh/openrc-run.sh"; \
        INIT="/lib/rc/sh/init.sh"; \
-     fi \
+       ;; \
+     esac \
   && sed -i 's/cgroup_add_service /# cgroup_add_service /g' "$OPENRC_RUN" \
   && sed -i 's/VSERVER/DOCKER/Ig' "$INIT"
 
