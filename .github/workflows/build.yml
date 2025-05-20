@@ -54,12 +54,6 @@ jobs:
           - image: ubuntu:24.04
             dockerfile: Dockerfile.debian
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: fedora:39
-            dockerfile: Dockerfile.redhat
-            platforms: linux/amd64,linux/arm64/v8
-          - image: fedora:40
-            dockerfile: Dockerfile.redhat
-            platforms: linux/amd64,linux/arm64/v8
           - image: fedora:41
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
