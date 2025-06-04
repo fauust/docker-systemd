@@ -37,6 +37,7 @@ Example `base_system` arguments :
 - `alpine:3.19`
 - `alpine:3.20`
 - `alpine:3.21`
+- `alpine:3.22`
 
 You can also use "non-slim" Debian images (`debian:11`) but we only build images
 based on `-slim` versions of Debian images.
@@ -62,6 +63,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.19
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.20
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.21
+❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.22
 ```
 
 ## Usage (docker)
