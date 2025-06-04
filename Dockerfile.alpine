@@ -20,13 +20,13 @@ RUN set -eux \
       /etc/init.d/modules-load \
       /etc/init.d/modloop \
   && case $VERSION_ID in \
-       3.21*) \
-         OPENRC_RUN="/usr/libexec/rc/sh/openrc-run.sh"; \
-         INIT="/usr/libexec/rc/sh/init.sh"; \
+       3.19* | 3.20*) \
+         OPENRC_RUN="/lib/rc/sh/openrc-run.sh"; \
+         INIT="/lib/rc/sh/init.sh"; \
        ;; \
        *) \
-       OPENRC_RUN="/lib/rc/sh/openrc-run.sh"; \
-       INIT="/lib/rc/sh/init.sh"; \
+         OPENRC_RUN="/usr/libexec/rc/sh/openrc-run.sh"; \
+         INIT="/usr/libexec/rc/sh/init.sh"; \
        ;; \
      esac \
   && sed -i 's/cgroup_add_service /# cgroup_add_service /g' "$OPENRC_RUN" \
