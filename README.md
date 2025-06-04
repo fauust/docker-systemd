@@ -14,7 +14,7 @@ Images are available on:
 ```console
 ❯ docker build . -f Dockerfile.debian -t systemd-debian-sid  --build-arg base_image=debian:sid-slim
 ❯ docker build . -f Dockerfile.redhat -t systemd-almalinux-8  --build-arg base_image=almalinux:8
-❯ docker build . -f Dockerfile.alpine -t openrc-alpine3.20  --build-arg base_image=alpine:3.20
+❯ docker build . -f Dockerfile.alpine -t openrc-alpine3.22  --build-arg base_image=alpine:3.22
 ```
 
 Example `base_system` arguments :
@@ -32,8 +32,6 @@ Example `base_system` arguments :
 - `almalinux:9`
 - `rockylinux:8`
 - `rockylinux:9`
-- `alpine:3.17`
-- `alpine:3.18`
 - `alpine:3.19`
 - `alpine:3.20`
 - `alpine:3.21`
@@ -58,8 +56,6 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-9
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-8
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-9
-❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.17
-❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.18
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.19
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.20
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.21
