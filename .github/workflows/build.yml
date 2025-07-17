@@ -63,10 +63,10 @@ jobs:
           - image: almalinux:9
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: rockylinux:8
+          - image: rockylinux/rockylinux:8
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
-          - image: rockylinux:9
+          - image: rockylinux/rockylinux:9
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
           - image: alpine:3.19
@@ -90,7 +90,8 @@ jobs:
       - name: Set up env vars
         run: |
           set -vx
-          IMG_TMP="${BASE_IMAGE/:/-}"
+          IMG_BASE="${BASE_IMAGE##*/}"
+          IMG_TMP="${IMG_BASE/:/-}"
           echo "IMG=${IMG_TMP/-slim}" >>$GITHUB_ENV
           echo "REPO=docker-systemd" >>$GITHUB_ENV
       - name: Install qemu-user-static
