@@ -57,6 +57,9 @@ jobs:
           - image: fedora:41
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
+          - image: fedora:42
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8
           - image: almalinux:8
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
