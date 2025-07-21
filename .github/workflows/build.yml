@@ -42,12 +42,6 @@ jobs:
           - image: debian:sid-slim
             dockerfile: Dockerfile.debian
             platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: ubuntu:18.04
-            dockerfile: Dockerfile.debian
-            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: ubuntu:20.04
-            dockerfile: Dockerfile.debian
-            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           - image: ubuntu:22.04
             dockerfile: Dockerfile.debian
             platforms: linux/amd64,linux/arm/v7,linux/ppc64le,linux/s390x
@@ -55,6 +49,9 @@ jobs:
             dockerfile: Dockerfile.debian
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           - image: fedora:41
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8
+          - image: fedora:42
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
           - image: almalinux:8
