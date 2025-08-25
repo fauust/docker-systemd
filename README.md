@@ -21,7 +21,7 @@ Example `base_system` arguments :
 
 - `debian:11-slim`
 - `debian:12-slim`
-- `debian:trixie-slim`
+- `debian:13-slim`
 - `debian:sid-slim`
 - `ubuntu:22.04`
 - `ubuntu:24.04`
@@ -44,7 +44,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ```console
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-11
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-12
-❯ docker pull ghcr.io/fauust/docker-systemd:debian-trixie #//TEMP change to 13 after release
+❯ docker pull ghcr.io/fauust/docker-systemd:debian-13
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-sid
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-22.04
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-24.04
