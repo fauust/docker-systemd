@@ -86,7 +86,7 @@ jobs:
       DOCKER_DEPLOY_IMAGES: false
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Set up env vars
         run: |
           set -vx
