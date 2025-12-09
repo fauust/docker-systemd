@@ -66,9 +66,6 @@ jobs:
           - image: rockylinux/rockylinux:9
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
-          - image: alpine:3.19
-            dockerfile: Dockerfile.alpine
-            platforms: linux/amd64,linux/arm64/v8
           - image: alpine:3.20
             dockerfile: Dockerfile.alpine
             platforms: linux/amd64,linux/arm64/v8
@@ -76,6 +73,9 @@ jobs:
             dockerfile: Dockerfile.alpine
             platforms: linux/amd64,linux/arm64/v8
           - image: alpine:3.22
+            dockerfile: Dockerfile.alpine
+            platforms: linux/amd64,linux/arm64/v8
+          - image: alpine:3.23
             dockerfile: Dockerfile.alpine
             platforms: linux/amd64,linux/arm64/v8
           - image: alpine:edge
