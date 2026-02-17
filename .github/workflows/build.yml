@@ -48,10 +48,10 @@ jobs:
           - image: ubuntu:24.04
             dockerfile: Dockerfile.debian
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          - image: quay.io/fedora/fedora:41
+          - image: quay.io/fedora/fedora:42
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
-          - image: quay.io/fedora/fedora:42
+          - image: quay.io/fedora/fedora:43
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
           - image: almalinux:8
