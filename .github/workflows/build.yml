@@ -60,10 +60,16 @@ jobs:
           - image: almalinux:9
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - image: almalinux:10
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
           - image: rockylinux/rockylinux:8
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
           - image: rockylinux/rockylinux:9
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8
+          - image: rockylinux/rockylinux:10
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
           - image: alpine:3.20

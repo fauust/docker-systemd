@@ -29,8 +29,10 @@ Example `base_system` arguments :
 - `fedora:43`
 - `almalinux:8`
 - `almalinux:9`
+- `almalinux:10`
 - `rockylinux:8`
 - `rockylinux:9`
+- `rockylinux:10`
 - `alpine:3.20`
 - `alpine:3.21`
 - `alpine:3.22`
@@ -53,8 +55,10 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-43
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-8
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-9
+❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-10
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-8
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-9
+❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-10
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.20
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.21
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.22
