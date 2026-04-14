@@ -54,7 +54,7 @@ repos:
         language: docker_image
         types: [markdown]
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.4.1
+    rev: v2.4.2
     hooks:
       - id: codespell
         name: Checks for common misspellings in text files
