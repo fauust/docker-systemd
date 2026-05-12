@@ -25,6 +25,7 @@ Example `base_system` arguments :
 - `debian:sid-slim`
 - `ubuntu:22.04`
 - `ubuntu:24.04`
+- `ubuntu:26.04`
 - `fedora:42`
 - `fedora:43`
 - `almalinux:8`
@@ -51,6 +52,7 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-sid
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-22.04
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-24.04
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-26.04
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-42
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-43
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-8
