@@ -19,26 +19,28 @@ Images are available on:
 
 Example `base_system` arguments :
 
-- `debian:11-slim`
-- `debian:12-slim`
-- `debian:13-slim`
-- `debian:sid-slim`
-- `ubuntu:22.04`
-- `ubuntu:24.04`
-- `ubuntu:26.04`
-- `fedora:42`
-- `fedora:43`
+- `almalinux:10`
 - `almalinux:8`
 - `almalinux:9`
-- `almalinux:10`
-- `rockylinux:8`
-- `rockylinux:9`
-- `rockylinux:10`
 - `alpine:3.20`
 - `alpine:3.21`
 - `alpine:3.22`
 - `alpine:3.23`
 - `alpine:edge`
+- `centos:stream10`
+- `centos:stream9`
+- `debian:11-slim`
+- `debian:12-slim`
+- `debian:13-slim`
+- `debian:sid-slim`
+- `fedora:42`
+- `fedora:43`
+- `rockylinux:10`
+- `rockylinux:8`
+- `rockylinux:9`
+- `ubuntu:22.04`
+- `ubuntu:24.04`
+- `ubuntu:26.04`
 
 You can also use "non-slim" Debian images (`debian:11`) but we only build images
 based on `-slim` versions of Debian images.
@@ -46,26 +48,28 @@ based on `-slim` versions of Debian images.
 The following containers are available from [Docker Hub](https://hub.docker.com/r/fauust/docker-systemd).
 
 ```console
-❯ docker pull ghcr.io/fauust/docker-systemd:debian-11
-❯ docker pull ghcr.io/fauust/docker-systemd:debian-12
-❯ docker pull ghcr.io/fauust/docker-systemd:debian-13
-❯ docker pull ghcr.io/fauust/docker-systemd:debian-sid
-❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-22.04
-❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-24.04
-❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-26.04
-❯ docker pull ghcr.io/fauust/docker-systemd:fedora-42
-❯ docker pull ghcr.io/fauust/docker-systemd:fedora-43
+❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-10
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-8
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-9
-❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-10
-❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-8
-❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-9
-❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-10
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.20
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.21
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.22
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.23
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-edge
+❯ docker pull ghcr.io/fauust/docker-systemd:centos-stream10
+❯ docker pull ghcr.io/fauust/docker-systemd:centos-stream9
+❯ docker pull ghcr.io/fauust/docker-systemd:debian-11
+❯ docker pull ghcr.io/fauust/docker-systemd:debian-12
+❯ docker pull ghcr.io/fauust/docker-systemd:debian-13
+❯ docker pull ghcr.io/fauust/docker-systemd:debian-sid
+❯ docker pull ghcr.io/fauust/docker-systemd:fedora-42
+❯ docker pull ghcr.io/fauust/docker-systemd:fedora-43
+❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-10
+❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-8
+❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-9
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-22.04
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-24.04
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-26.04
 ```
 
 ## Usage (docker)

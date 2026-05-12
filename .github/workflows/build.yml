@@ -57,6 +57,12 @@ jobs:
           - image: quay.io/fedora/fedora:43
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8
+          - image: quay.io/centos/centos:stream9
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8
+          - image: quay.io/centos/centos:stream10
+            dockerfile: Dockerfile.redhat
+            platforms: linux/amd64,linux/arm64/v8
           - image: almalinux:8
             dockerfile: Dockerfile.redhat
             platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
