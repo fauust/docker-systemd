@@ -22,10 +22,10 @@ Example `base_system` arguments :
 - `almalinux:10`
 - `almalinux:8`
 - `almalinux:9`
-- `alpine:3.20`
 - `alpine:3.21`
 - `alpine:3.22`
 - `alpine:3.23`
+- `alpine:3.24`
 - `alpine:edge`
 - `centos:stream10`
 - `centos:stream9`
@@ -33,8 +33,8 @@ Example `base_system` arguments :
 - `debian:12-slim`
 - `debian:13-slim`
 - `debian:sid-slim`
-- `fedora:42`
 - `fedora:43`
+- `fedora:44`
 - `rockylinux:10`
 - `rockylinux:8`
 - `rockylinux:9`
@@ -51,10 +51,10 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-10
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-8
 ❯ docker pull ghcr.io/fauust/docker-systemd:almalinux-9
-❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.20
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.21
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.22
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.23
+❯ docker pull ghcr.io/fauust/docker-systemd:alpine-3.24
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-edge
 ❯ docker pull ghcr.io/fauust/docker-systemd:centos-stream10
 ❯ docker pull ghcr.io/fauust/docker-systemd:centos-stream9
@@ -62,8 +62,8 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-12
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-13
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-sid
-❯ docker pull ghcr.io/fauust/docker-systemd:fedora-42
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-43
+❯ docker pull ghcr.io/fauust/docker-systemd:fedora-44
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-10
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-8
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-9
