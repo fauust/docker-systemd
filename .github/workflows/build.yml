@@ -35,13 +35,12 @@ jobs:
             platforms: linux/386,linux/amd64,linux/arm/v7
           - image: debian:12-slim
             dockerfile: Dockerfile.debian
-            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+            platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le
           - image: debian:13-slim
             dockerfile: Dockerfile.debian
             platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           - image: debian:sid-slim
             dockerfile: Dockerfile.debian
-            # platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
             platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le
           - image: ubuntu:22.04
             dockerfile: Dockerfile.debian
