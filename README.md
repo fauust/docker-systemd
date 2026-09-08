@@ -29,7 +29,6 @@ Example `base_system` arguments :
 - `alpine:edge`
 - `centos:stream10`
 - `centos:stream9`
-- `debian:11-slim`
 - `debian:12-slim`
 - `debian:13-slim`
 - `debian:sid-slim`
@@ -42,7 +41,7 @@ Example `base_system` arguments :
 - `ubuntu:24.04`
 - `ubuntu:26.04`
 
-You can also use "non-slim" Debian images (`debian:11`) but we only build images
+You can also use "non-slim" Debian images (`debian:13`) but we only build images
 based on `-slim` versions of Debian images.
 
 The following containers are available from [Docker Hub](https://hub.docker.com/r/fauust/docker-systemd).
@@ -58,7 +57,6 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:alpine-edge
 ❯ docker pull ghcr.io/fauust/docker-systemd:centos-stream10
 ❯ docker pull ghcr.io/fauust/docker-systemd:centos-stream9
-❯ docker pull ghcr.io/fauust/docker-systemd:debian-11
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-12
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-13
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-sid
