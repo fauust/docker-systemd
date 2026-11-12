@@ -34,12 +34,14 @@ Example `base_system` arguments :
 - `debian:sid-slim`
 - `fedora:43`
 - `fedora:44`
+- `fedora:45`
 - `rockylinux:10`
 - `rockylinux:8`
 - `rockylinux:9`
 - `ubuntu:22.04`
 - `ubuntu:24.04`
 - `ubuntu:26.04`
+- `ubuntu:26.10`
 
 You can also use "non-slim" Debian images (`debian:13`) but we only build images
 based on `-slim` versions of Debian images.
@@ -62,12 +64,14 @@ The following containers are available from [Docker Hub](https://hub.docker.com/
 ❯ docker pull ghcr.io/fauust/docker-systemd:debian-sid
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-43
 ❯ docker pull ghcr.io/fauust/docker-systemd:fedora-44
+❯ docker pull ghcr.io/fauust/docker-systemd:fedora-45
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-10
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-8
 ❯ docker pull ghcr.io/fauust/docker-systemd:rockylinux-9
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-22.04
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-24.04
 ❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-26.04
+❯ docker pull ghcr.io/fauust/docker-systemd:ubuntu-26.10
 ```
 
 ## Usage (docker)
